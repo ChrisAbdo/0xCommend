@@ -10,15 +10,18 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   return (
     <div
-      className={`sticky top-0 w-full bg-white z-50 transition-all ${
+      className={`sticky top-0 w-full z-50 transition-all ${
         scrolled
-          ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-          : "bg-white"
+          ? "border-b border-[#111] bg-black/50 backdrop-blur-xl"
+          : "bg-black"
       }`}
     >
       <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-        <Link href="/" className="flex items-center font-display text-2xl">
-          <p>0xCommend</p>
+        <Link
+          href="/"
+          className="flex items-center font-display text-2xl text-white"
+        >
+          0xCommend
         </Link>
 
         <div className="space-x-4 hidden lg:flex">

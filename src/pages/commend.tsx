@@ -204,15 +204,7 @@ export default function Example() {
   }
 
   return (
-    <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
+    <div className="bg-[#111] h-screen">
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -334,44 +326,46 @@ export default function Example() {
                       id="search"
                       placeholder="Search for user"
                       onChange={(e) => setQuery(e.target.value)}
-                      className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block bg-black w-full rounded-md border-0 py-1.5 pr-14 shadow-sm ring-1 ring-inset ring-zinc-700 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                    <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-                      <kbd className="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">
+                    <div className="absolute inset-y-0 -right-1 flex py-1.5 pr-1.5">
+                      <kbd className="inline-flex items-center rounded border border-zinc-700 px-1 font-sans text-xs text-[#777]">
                         ⌘K
                       </kbd>
                     </div>
                   </div>
-                  <Select onValueChange={setQueryBySelect}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Filter by role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Roles</SelectLabel>
-                        <SelectItem value="">All</SelectItem>
-                        <SelectItem value="Developer">Developer</SelectItem>
-                        <SelectItem value="Designer">Designer</SelectItem>
-                        <SelectItem value="Marketer">Marketer</SelectItem>
-                        <SelectItem value="Project Manager">
-                          Project Manager
-                        </SelectItem>
-                        <SelectItem value="Business Analyst">
-                          Business Analyst
-                        </SelectItem>
-                        <SelectItem value="Product Designer">
-                          Product Designer
-                        </SelectItem>
-                        <SelectItem value="Influencer">Influencer</SelectItem>
-                        <SelectItem value="Community Manager">
-                          Community Manager
-                        </SelectItem>
-                        <SelectItem value="Content Creator">
-                          Content Creator
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <div className="mb-1">
+                    <Select onValueChange={setQueryBySelect}>
+                      <SelectTrigger className="w-[180px] bg-black">
+                        <SelectValue placeholder="Filter by role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Roles</SelectLabel>
+                          <SelectItem value="">All</SelectItem>
+                          <SelectItem value="Developer">Developer</SelectItem>
+                          <SelectItem value="Designer">Designer</SelectItem>
+                          <SelectItem value="Marketer">Marketer</SelectItem>
+                          <SelectItem value="Project Manager">
+                            Project Manager
+                          </SelectItem>
+                          <SelectItem value="Business Analyst">
+                            Business Analyst
+                          </SelectItem>
+                          <SelectItem value="Product Designer">
+                            Product Designer
+                          </SelectItem>
+                          <SelectItem value="Influencer">Influencer</SelectItem>
+                          <SelectItem value="Community Manager">
+                            Community Manager
+                          </SelectItem>
+                          <SelectItem value="Content Creator">
+                            Content Creator
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
 
                 {query && (
@@ -406,14 +400,17 @@ export default function Example() {
                     className="absolute inset-0 flex items-center"
                     aria-hidden="true"
                   >
-                    <div className="w-full border-t border-gray-300" />
+                    {/* <div className="w-full border-t border-zinc-700" /> */}
                   </div>
                 </div>
               </div>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
                 {/* Your content */}
-                <div className="overflow-hidden bg-white shadow sm:rounded-md ">
-                  <ul role="list" className="divide-y divide-gray-200 ">
+                <div className="overflow-hidden bg-black border border-zinc-700 shadow sm:rounded-md ">
+                  <ul
+                    role="list"
+                    className="divide-y divide-zinc-700 rounded-md"
+                  >
                     {/* {applications.map((application) => ( */}
 
                     {filteredItems.length
@@ -424,7 +421,7 @@ export default function Example() {
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.1, delay: index * 0.1 }}
                           >
-                            <div className="block hover:bg-gray-50 transition-all duration-500">
+                            <div className="block hover:bg-[#111] transition-all duration-500">
                               <div className="flex items-center px-4 py-4 sm:px-6">
                                 <div className="flex min-w-0 flex-1 items-center">
                                   <div className="flex-shrink-0">
@@ -437,7 +434,7 @@ export default function Example() {
                                   </div>
                                   <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                     <div>
-                                      <p className="truncate text-sm font-medium text-indigo-600">
+                                      <p className="truncate text-sm font-medium text-white">
                                         {/* @ts-ignore */}
                                         {nft.altName}
                                       </p>
@@ -458,7 +455,7 @@ export default function Example() {
                                           // @ts-ignore
                                           setQuery(nft.role);
                                         }}
-                                        className="cursor-pointer inline-flex items-center rounded-md bg-gray-100 hover:bg-gray-200 transition-all duration-400 px-2.5 py-0.5 text-sm font-medium text-gray-800"
+                                        className="cursor-pointer inline-flex items-center rounded-md bg-[#333] hover:bg-[#333]/80 transition-all duration-400 px-2.5 py-0.5 text-sm font-medium text-white"
                                       >
                                         {/* @ts-ignore */}
                                         {nft.role}
@@ -474,10 +471,6 @@ export default function Example() {
                                   </div>
                                 </div>
                                 <div className="flex space-x-2">
-                                  {/* <ChevronRightIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              /> */}
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -505,7 +498,7 @@ export default function Example() {
                                   >
                                     <Dialog
                                       as="div"
-                                      className="relative z-50"
+                                      className="relative z-50 "
                                       onClose={setSlideOverOpen}
                                     >
                                       <div className="fixed inset-0" />
@@ -523,7 +516,7 @@ export default function Example() {
                                               leaveTo="translate-x-full"
                                             >
                                               <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                                <div className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                                                <div className="flex h-full flex-col divide-y divide-gray-200 bg-black shadow-xl">
                                                   <div className="h-0 flex-1 overflow-y-auto">
                                                     <div className="bg-indigo-700 py-6 px-4 sm:px-6">
                                                       <div className="flex items-center justify-between">
@@ -567,7 +560,7 @@ export default function Example() {
                                                           <div>
                                                             <label
                                                               htmlFor="project-name"
-                                                              className="block text-sm font-medium leading-6 text-gray-900"
+                                                              className="block text-sm font-medium leading-6 text-white"
                                                             >
                                                               Confirm your
                                                               Wallet Address
@@ -587,7 +580,7 @@ export default function Example() {
                                                                 }
                                                                 required
                                                                 // className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                                className="valid:[&:not(:placeholder-shown)]:border-green-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                className="valid:[&:not(:placeholder-shown)]:border-green-500 [&:not(:placeholder-shown):not(:focus):invalid~span]:block invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-400 block w-full flex-1 rounded-md border-zinc-700 bg-black text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 onChange={(
                                                                   e
                                                                 ) => {
@@ -623,7 +616,7 @@ export default function Example() {
                                                           <div>
                                                             <label
                                                               htmlFor="description"
-                                                              className="block text-sm font-medium leading-6 text-gray-900"
+                                                              className="block text-sm font-medium leading-6 text-white"
                                                             >
                                                               Short Description
                                                               of your Commend
@@ -633,7 +626,7 @@ export default function Example() {
                                                                 rows={4}
                                                                 name="comment"
                                                                 id="comment"
-                                                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                className="block w-full rounded-md text-white border-zinc-700 bg-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 placeholder="This should be a short description of how this person has helped you or your team."
                                                                 onChange={(
                                                                   event
@@ -816,14 +809,14 @@ export default function Example() {
                           <li className="py-4" key={index}>
                             <div className="flex items-center space-x-4">
                               <div className="flex-shrink-0">
-                                <div className="bg-gray-200 w-8 h-8 animate-pulse rounded-full"></div>
+                                <div className="bg-[#333] w-8 h-8 animate-pulse rounded-full"></div>
                               </div>
                               <div className="min-w-0 flex-1">
-                                <div className="bg-gray-200 w-full h-8 animate-pulse rounded-full"></div>
+                                <div className="bg-[#333] w-full h-8 animate-pulse rounded-full"></div>
                                 {/* <p className="truncate text-sm text-gray-500">{'@' + person.handle}</p> */}
                               </div>
                               <div>
-                                <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full"></div>
+                                <div className="bg-[#333] w-20 h-8 animate-pulse rounded-full"></div>
                               </div>
                             </div>
                           </li>
@@ -835,6 +828,6 @@ export default function Example() {
           </main>
         </div>
       </div>
-    </>
+    </div>
   );
 }

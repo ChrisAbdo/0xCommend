@@ -9,6 +9,10 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
+import { motion } from "framer-motion";
+import Balancer from "react-wrap-balancer";
+import Link from "next/link";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -132,7 +136,7 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-black">
       <main className="isolate">
         {/* Hero section */}
         <div className="relative pt-14">
@@ -163,11 +167,11 @@ export default function Example() {
               </svg>
             </div>
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-              <div className="mx-auto max-w-2xl text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Deploy to the cloud with confidence
+              {/* <div className="mx-auto max-w-2xl text-center">
+                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                  The Easiest On-Chain Commendation System
                 </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
+                <p className="mt-6 text-lg leading-8 text-[#999]">
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
                   qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
                   occaecat fugiat aliqua.
@@ -186,6 +190,56 @@ export default function Example() {
                     Learn more <span aria-hidden="true">→</span>
                   </a>
                 </div>
+              </div> */}
+              <div className="mx-auto text-center">
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  animate="show"
+                  viewport={{ once: true }}
+                  variants={{
+                    hidden: {},
+                    show: {
+                      transition: {
+                        staggerChildren: 0.15,
+                      },
+                    },
+                  }}
+                >
+                  <motion.h1
+                    className="text-white text-center font-display text-4xl font-bold tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
+                    variants={FADE_DOWN_ANIMATION_VARIANTS}
+                  >
+                    <Balancer>
+                      The Easiest On-Chain Commendation System
+                    </Balancer>
+                  </motion.h1>
+                  <motion.p
+                    className="mt-6 text-center text-[#999] md:text-xl"
+                    variants={FADE_DOWN_ANIMATION_VARIANTS}
+                  >
+                    <Balancer>
+                      Welcome to 0xCommend, the future of on-chain reputation.
+                    </Balancer>
+                  </motion.p>
+                  <motion.div
+                    className="mx-auto mt-6 flex items-center justify-center space-x-5"
+                    variants={FADE_DOWN_ANIMATION_VARIANTS}
+                  >
+                    <Link
+                      href="commend"
+                      className="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Launch App
+                    </Link>
+                    <a
+                      href="https://github.com/ChrisAbdo/0xCommend"
+                      className="rounded-md bg-[#333] py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-[#333]/80"
+                    >
+                      Star on Github
+                    </a>
+                  </motion.div>
+                </motion.div>
               </div>
               <div className="mt-16 flow-root sm:mt-24">
                 <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">

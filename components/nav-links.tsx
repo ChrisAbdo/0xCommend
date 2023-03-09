@@ -21,7 +21,7 @@ export default function NavLinks() {
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className="absolute inset-0 rounded-lg bg-gray-100"
+            className="absolute inset-0 rounded-lg bg-[#111]"
             layoutId="hoverBackground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -32,7 +32,7 @@ export default function NavLinks() {
           />
         )}
       </AnimatePresence>
-      <span className="relative z-10 text-black">{label}</span>
+      <span className="relative z-10 text-white">{label}</span>
     </Link>
   ));
 }
