@@ -11,7 +11,10 @@ import {
 import Web3 from "web3";
 import Commend from "@/backend/build/contracts/Commend.json";
 import NFT from "@/backend/build/contracts/NFT.json";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  InformationCircleIcon,
+  ArrowsPointingInIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useToast } from "@/lib/hooks/use-toast";
@@ -176,23 +179,23 @@ export default function CreateProfile() {
   }
 
   return (
-    <div>
+    <div className="bg-black h-screen">
       {addressListed ? (
         <motion.div
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-md bg-blue-50 p-4"
+          className="rounded-md bg-[#111] p-4"
         >
           <div className="flex">
             <div className="flex-shrink-0">
               <InformationCircleIcon
-                className="h-5 w-5 text-blue-400"
+                className="h-5 w-5 text-indigo-400"
                 aria-hidden="true"
               />
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
-              <p className="text-sm text-blue-700">
+              <p className="text-sm text-white">
                 You already have a profile! Consider commending someone or
                 generating a{" "}
                 <Link className="underline" href="/receive-commend">
@@ -203,7 +206,7 @@ export default function CreateProfile() {
               <p className="mt-3 text-sm md:mt-0 md:ml-6">
                 <Link
                   href="/commend"
-                  className="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600"
+                  className="whitespace-nowrap font-medium text-white hover:underline"
                 >
                   Commend someone
                   <span aria-hidden="true"> &rarr;</span>
@@ -214,13 +217,13 @@ export default function CreateProfile() {
         </motion.div>
       ) : null}
       <div className="space-y-6">
-        <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+        <div className="bg-black px-4 py-5 shadow sm:rounded-lg sm:p-6">
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">
+              <h3 className="text-base font-semibold leading-6 text-white">
                 Create a 0xCommend Profile!
               </h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-[#999]">
                 Make sure you connect your wallet first. As of now, you cannot
                 make edits later, be sure to upload the correct info! It takes
                 less than 1 minute to create a profile.
@@ -231,7 +234,7 @@ export default function CreateProfile() {
                 <div className="col-span-3 sm:col-span-2">
                   <label
                     htmlFor="company-website"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-white"
                   >
                     Alternative Name (ENS, Twitter, etc.)
                   </label>
@@ -240,7 +243,7 @@ export default function CreateProfile() {
                       type="text"
                       name="company-website"
                       id="company-website"
-                      className="block w-full flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-full flex-1 rounded-md border-0 py-1.5 text-white bg-black ring-1 ring-inset ring-zinc-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       placeholder="ex. abd0x.eth"
                       onChange={(e) =>
                         updateFormInput({
@@ -254,11 +257,11 @@ export default function CreateProfile() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
+                <label className="block text-sm font-medium leading-6 text-white">
                   Profile Photo
                 </label>
                 <div className="mt-2 flex items-center space-x-5">
-                  <span className="inline-block h-12 w-12 overflow-hidden rounded-md bg-gray-100">
+                  <span className="inline-block h-12 w-12 overflow-hidden rounded-md bg-[#111]">
                     {fileUrl ? (
                       <img
                         className="h-full w-full text-gray-300"
@@ -267,7 +270,7 @@ export default function CreateProfile() {
                       />
                     ) : (
                       <svg
-                        className="h-full w-full text-gray-300"
+                        className="h-full w-full text-white"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -282,9 +285,9 @@ export default function CreateProfile() {
             file:mr-5 file:py-2 file:px-6
             file:rounded-md file:border-0
             file:text-sm file:font-medium
-            file:bg-gray-100 file:text-black
+            file:bg-[#333] file:text-white
             hover:file:cursor-pointer hover:file:bg-bg-gray-100/80
-            hover:file:text-black/80
+            hover:file:text-white/80
           "
                   />
                 </div>
@@ -292,7 +295,7 @@ export default function CreateProfile() {
 
               <div className="grid grid-cols-3 gap-6">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
+                  <label className="block text-sm font-medium leading-6 text-white">
                     Role
                   </label>
                   <Select
@@ -330,13 +333,24 @@ export default function CreateProfile() {
                   </Select>
                 </div>
               </div>
-              <button
-                onClick={listNFTForSale}
-                type="submit"
-                className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                Create Commend Profile!
-              </button>
+              {loading ? (
+                <button
+                  disabled
+                  type="submit"
+                  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                >
+                  Creating profile&nbsp;
+                  <ArrowsPointingInIcon className="animate-spin h-5 w-5" />
+                </button>
+              ) : (
+                <button
+                  onClick={listNFTForSale}
+                  type="submit"
+                  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                >
+                  Create Commend Profile!
+                </button>
+              )}
             </div>
           </div>
         </div>

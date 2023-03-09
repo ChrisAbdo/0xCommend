@@ -25,8 +25,9 @@ import {
   InboxIcon,
   UsersIcon,
   XMarkIcon,
+  WalletIcon,
 } from "@heroicons/react/24/outline";
-import { CheckCircleIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -439,7 +440,7 @@ export default function Example() {
                                         {nft.altName}
                                       </p>
                                       <p className="mt-2 flex items-center text-sm text-gray-500">
-                                        <EnvelopeIcon
+                                        <WalletIcon
                                           className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                                           aria-hidden="true"
                                         />
@@ -476,7 +477,7 @@ export default function Example() {
                                     onClick={() => {
                                       setSelectedNFTCommends(nft);
                                     }}
-                                    className="rounded-md bg-indigo-50 py-2.5 px-3.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 transition-all duration-400"
+                                    className="rounded-md bg-[#333] py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-[#333]/80 transition-all duration-400"
                                   >
                                     {/* @ts-ignore */}
                                     {nft.commendCount} Reviews
@@ -516,7 +517,7 @@ export default function Example() {
                                               leaveTo="translate-x-full"
                                             >
                                               <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                                <div className="flex h-full flex-col divide-y divide-gray-200 bg-black shadow-xl">
+                                                <div className="flex h-full flex-col divide-y divide-zinc-700 bg-black shadow-xl">
                                                   <div className="h-0 flex-1 overflow-y-auto">
                                                     <div className="bg-indigo-700 py-6 px-4 sm:px-6">
                                                       <div className="flex items-center justify-between">
@@ -689,10 +690,10 @@ export default function Example() {
                                               leaveTo="translate-x-full"
                                             >
                                               <Dialog.Panel className="pointer-events-auto w-screen max-w-2xl">
-                                                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                                <div className="flex h-full flex-col overflow-y-scroll bg-black shadow-xl">
                                                   <div className="px-4 py-6 sm:px-6">
                                                     <div className="flex items-start justify-between">
-                                                      <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
+                                                      <Dialog.Title className="text-base font-semibold leading-6 text-white">
                                                         Profile
                                                       </Dialog.Title>
                                                       <div className="ml-3 flex h-7 items-center">
@@ -717,8 +718,8 @@ export default function Example() {
                                                     </div>
                                                   </div>
                                                   {/* Main */}
-                                                  <div className="divide-y divide-gray-200">
-                                                    <div className="pb-6 sticky top-0 bg-white">
+                                                  <div className="divide-y divide-zinc-700">
+                                                    <div className="pb-6 sticky top-0 bg-[#111]">
                                                       <div className="h-24 bg-indigo-700 sm:h-20 lg:h-28" />
                                                       <div className="lg:-mt-15 -mt-12  px-4 sm:-mt-8 sm:flex sm:items-end sm:px-6 ">
                                                         <div>
@@ -738,7 +739,7 @@ export default function Example() {
                                                         <div className="mt-6 sm:ml-6 sm:flex-1">
                                                           <div>
                                                             <div className="flex items-center">
-                                                              <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
+                                                              <h3 className="text-xl font-bold text-white sm:text-2xl">
                                                                 {/* @ts-ignore */}
                                                                 {nft.altName}
                                                                 &apos;s Commends
@@ -749,7 +750,7 @@ export default function Example() {
                                                                 </span>
                                                               </span>
                                                             </div>
-                                                            <p className="text-sm text-gray-500">
+                                                            <p className="text-sm text-[#999]">
                                                               {/* @ts-ignore */}
                                                               {nft.seller}
                                                             </p>
@@ -764,10 +765,10 @@ export default function Example() {
                                                         index: any
                                                       ) => (
                                                         <Fragment key={index}>
-                                                          <div className="px-4 py-5 sm:px-0 sm:py-0 hover:bg-gray-100 transition-all duration-400">
+                                                          <div className="px-4 py-5 sm:px-0 sm:py-0 hover:bg-[#111] transition-all duration-400">
                                                             <dl className="space-y-8 sm:space-y-0 sm:divide-y sm:divide-gray-200">
                                                               <div className="sm:flex sm:px-6 sm:py-5">
-                                                                <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0 lg:w-48">
+                                                                <dt className="text-sm font-medium text-white sm:w-40 sm:flex-shrink-0 lg:w-48">
                                                                   From:{" "}
                                                                   {/* @ts-ignore */}
                                                                   {nft.commendAddress[
@@ -782,7 +783,7 @@ export default function Example() {
                                                                       index
                                                                     ].slice(-4)}
                                                                 </dt>
-                                                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 sm:ml-6">
+                                                                <dd className="mt-1 text-sm text-white sm:col-span-2 sm:mt-0 sm:ml-6">
                                                                   <p>{desc}</p>
                                                                 </dd>
                                                               </div>
@@ -805,7 +806,7 @@ export default function Example() {
                             </div>
                           </motion.li>
                         ))
-                      : [...Array(10)].map((_, index) => (
+                      : [...Array(3)].map((_, index) => (
                           <li className="py-4" key={index}>
                             <div className="flex items-center space-x-4">
                               <div className="flex-shrink-0">
