@@ -196,10 +196,9 @@ export default function CreateProfile() {
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
               <p className="text-sm text-white">
-                You already have a profile! Consider commending someone or
-                generating a{" "}
-                <Link className="underline" href="/receive-commend">
-                  receive page
+                You already have a profile! Start commending others on the&nbsp;
+                <Link className="underline" href="/commend">
+                  commend page
                 </Link>
                 .
               </p>
@@ -221,7 +220,7 @@ export default function CreateProfile() {
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <h3 className="text-base font-semibold leading-6 text-white">
-                Create a 0xCommend Profile!
+                Create a Commend Profile!
               </h3>
               <p className="mt-1 text-sm text-[#999]">
                 Make sure you connect your wallet first. As of now, you cannot

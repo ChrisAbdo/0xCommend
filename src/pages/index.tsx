@@ -219,7 +219,7 @@ export default function Example() {
                     variants={FADE_DOWN_ANIMATION_VARIANTS}
                   >
                     <Balancer>
-                      Welcome to 0xCommend, the future of on-chain reputation.
+                      Welcome to Commend, the future of on-chain reputation.
                     </Balancer>
                   </motion.p>
                   <motion.div
