@@ -550,8 +550,8 @@ export default function Example() {
                                                         <p className="text-sm text-indigo-300">
                                                           Get started by filling
                                                           in the information
-                                                          below to create your
-                                                          new project.
+                                                          below to give a
+                                                          commend!
                                                         </p>
                                                       </div>
                                                     </div>

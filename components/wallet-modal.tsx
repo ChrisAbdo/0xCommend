@@ -1,9 +1,17 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckIcon, LinkIcon } from "@heroicons/react/24/outline";
-import { ConnectWallet } from "@thirdweb-dev/react";
-
+import {
+  useNetworkMismatch,
+  useAddress,
+  ConnectWallet,
+  useNetwork,
+  ChainId,
+} from "@thirdweb-dev/react";
 export default function WalletModal({ open, setOpen }: any) {
+  const address = useAddress();
+  const isOnWrongNetwork = useNetworkMismatch();
+  const [, switchNetwork] = useNetwork();
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -49,6 +57,17 @@ export default function WalletModal({ open, setOpen }: any) {
                 </div>
                 <div className="mt-5 sm:mt-6">
                   <ConnectWallet accentColor="#4f46e5" colorMode="dark" />
+
+                  {isOnWrongNetwork && (
+                    <button
+                      type="button"
+                      // @ts-ignore
+                      onClick={() => switchNetwork(ChainId.Mumbai)}
+                      className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      WRONG NETWORK! Change to Polygon
+                    </button>
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

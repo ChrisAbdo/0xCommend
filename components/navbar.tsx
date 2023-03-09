@@ -4,9 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import WalletModal from "./wallet-modal";
 import NavLinks from "./nav-links";
+import { useAddress } from "@thirdweb-dev/react";
 
 export default function Navbar() {
   const scrolled = useScroll(50);
+  const address = useAddress();
+
   const [open, setOpen] = React.useState(false);
   return (
     <div
@@ -35,7 +38,13 @@ export default function Navbar() {
             className="rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={() => setOpen(true)}
           >
-            Connect Wallet
+            {address ? (
+              <span>
+                {address.slice(0, 5)}...{address.slice(-4)}
+              </span>
+            ) : (
+              <span>Connect Wallet</span>
+            )}
           </button>
           <WalletModal open={open} setOpen={setOpen} />
         </div>
