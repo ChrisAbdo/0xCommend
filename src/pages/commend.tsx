@@ -157,7 +157,7 @@ export default function Example() {
     try {
       toast({
         title: "Please confirm the transaction in your wallet.",
-        description: "You will be charged 0.001 ETH for this transaction.",
+        description: "You will be charged 0.0001 MATIC for this transaction",
       });
       setLoading(true);
       // @ts-ignore
@@ -176,7 +176,7 @@ export default function Example() {
           // @ts-ignore
           from: window.ethereum.selectedAddress,
 
-          value: web3.utils.toWei("0.001", "ether"),
+          value: web3.utils.toWei("0.0001", "ether"),
         })
         .on("receipt", function () {
           console.log("listed");

@@ -8,7 +8,7 @@ export default function NavLinks() {
   return [
     ["Commend", "/commend"],
     ["Create Profile", "/create-profile"],
-    ["Learn More", "https://www.twitter.com/chrisabdo"],
+    ["Learn More", "https://www.twitter.com/abdo_eth"],
   ].map(([label, href], index) => (
     <Link
       key={label}
