@@ -4,77 +4,30 @@ import Commend from "@/backend/build/contracts/Commend.json";
 import NFT from "@/backend/build/contracts/NFT.json";
 import { useAddress } from "@thirdweb-dev/react";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { motion } from "framer-motion";
+import { Dialog, Transition } from "@headlessui/react";
 import { useToast } from "@/lib/hooks/use-toast";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
+  SelectLabel,
+} from "@/components/ui/select";
+import {
   Bars3BottomLeftIcon,
-  BellIcon,
   CalendarIcon,
   ChartBarIcon,
-  EllipsisVerticalIcon,
   FolderIcon,
   HomeIcon,
   InboxIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  MagnifyingGlassIcon,
-  CheckCircleIcon,
-  ChevronRightIcon,
-  EnvelopeIcon,
-  ArchiveBoxIcon,
-  ArrowRightCircleIcon,
-  ChevronDownIcon,
-  DocumentDuplicateIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
-  UserPlusIcon,
-  LinkIcon,
-  PlusIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/react/20/solid";
+import { CheckCircleIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
 
-const applications = [
-  {
-    applicant: {
-      name: "Ricardo Cooper",
-      email: "ricardo.cooper@example.com",
-      imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    date: "2020-01-07",
-    dateFull: "January 7, 2020",
-    stage: "Completed phone screening",
-    href: "#",
-  },
-  {
-    applicant: {
-      name: "Kristen Ramos",
-      email: "kristen.ramos@example.com",
-      imageUrl:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    date: "2020-01-07",
-    dateFull: "January 7, 2020",
-    stage: "Completed phone screening",
-    href: "#",
-  },
-  {
-    applicant: {
-      name: "Ted Fox",
-      email: "ted.fox@example.com",
-      imageUrl:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    date: "2020-01-07",
-    dateFull: "January 7, 2020",
-    stage: "Completed phone screening",
-    href: "#",
-  },
-];
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
   { name: "Team", href: "#", icon: UsersIcon, current: false },
@@ -82,48 +35,6 @@ const navigation = [
   { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
   { name: "Documents", href: "#", icon: InboxIcon, current: false },
   { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
-const team = [
-  {
-    name: "Tom Cook",
-    email: "tom.cook@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Whitney Francis",
-    email: "whitney.francis@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Leonard Krasner",
-    email: "leonard.krasner@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Floyd Miles",
-    email: "floyd.miles@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Emily Selman",
-    email: "emily.selman@example.com",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
 ];
 
 function classNames(...classes: any[]) {
@@ -431,172 +342,64 @@ export default function Example() {
                       </kbd>
                     </div>
                   </div>
-                  <Menu as="div" className="relative inline-block text-left">
-                    <div>
-                      <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                        Sort by Role
-                        <ChevronDownIcon
-                          className="-mr-1 h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </Menu.Button>
-                    </div>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <PencilSquareIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Edit
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <DocumentDuplicateIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Duplicate
-                              </a>
-                            )}
-                          </Menu.Item>
-                        </div>
-                        <div className="py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <ArchiveBoxIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Archive
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <ArrowRightCircleIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Move
-                              </a>
-                            )}
-                          </Menu.Item>
-                        </div>
-                        <div className="py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <UserPlusIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Share
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <HeartIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Add to favorites
-                              </a>
-                            )}
-                          </Menu.Item>
-                        </div>
-                        <div className="py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "group flex items-center px-4 py-2 text-sm"
-                                )}
-                              >
-                                <TrashIcon
-                                  className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                Delete
-                              </a>
-                            )}
-                          </Menu.Item>
-                        </div>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                  <Select onValueChange={setQueryBySelect}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Filter by role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Roles</SelectLabel>
+                        <SelectItem value="">All</SelectItem>
+                        <SelectItem value="Developer">Developer</SelectItem>
+                        <SelectItem value="Designer">Designer</SelectItem>
+                        <SelectItem value="Marketer">Marketer</SelectItem>
+                        <SelectItem value="Project Manager">
+                          Project Manager
+                        </SelectItem>
+                        <SelectItem value="Business Analyst">
+                          Business Analyst
+                        </SelectItem>
+                        <SelectItem value="Product Designer">
+                          Product Designer
+                        </SelectItem>
+                        <SelectItem value="Influencer">Influencer</SelectItem>
+                        <SelectItem value="Community Manager">
+                          Community Manager
+                        </SelectItem>
+                        <SelectItem value="Content Creator">
+                          Content Creator
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                 </div>
+
+                {query && (
+                  <div className="mb-2">
+                    <span className="inline-flex items-center rounded-md bg-indigo-100 py-0.5 pl-2.5 pr-1 text-sm font-medium text-indigo-700">
+                      {query}
+                      <button
+                        type="button"
+                        onClick={() => setQuery("")}
+                        className="ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-md text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:bg-indigo-500 focus:text-white focus:outline-none"
+                      >
+                        <span className="sr-only">Remove large option</span>
+                        <svg
+                          className="h-2 w-2"
+                          stroke="currentColor"
+                          fill="none"
+                          viewBox="0 0 8 8"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeWidth="1.5"
+                            d="M1 1l6 6m0-6L1 7"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  </div>
+                )}
 
                 <div className="relative">
                   <div
@@ -649,20 +452,24 @@ export default function Example() {
                                         </span>
                                       </p>
                                     </div>
-                                    <div className="hidden md:block">
-                                      <div>
-                                        <span className="inline-flex items-center rounded-md bg-indigo-100 px-2.5 py-0.5 text-sm font-medium text-indigo-800">
-                                          {/* @ts-ignore */}
-                                          {nft.role}
-                                        </span>
-                                        <p className="mt-2 flex items-center text-sm text-gray-500">
-                                          <CheckCircleIcon
-                                            className="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400"
-                                            aria-hidden="true"
-                                          />
-                                          Verified User
-                                        </p>
-                                      </div>
+                                    <div className="hidden lg:block">
+                                      <span
+                                        onClick={() => {
+                                          // @ts-ignore
+                                          setQuery(nft.role);
+                                        }}
+                                        className="cursor-pointer inline-flex items-center rounded-md bg-gray-100 hover:bg-gray-200 transition-all duration-400 px-2.5 py-0.5 text-sm font-medium text-gray-800"
+                                      >
+                                        {/* @ts-ignore */}
+                                        {nft.role}
+                                      </span>
+                                      <p className="mt-2 flex items-center text-sm text-gray-500">
+                                        <CheckCircleIcon
+                                          className="mr-1.5 h-5 w-5 flex-shrink-0 text-indigo-400"
+                                          aria-hidden="true"
+                                        />
+                                        Verified Profile
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
@@ -676,7 +483,7 @@ export default function Example() {
                                     onClick={() => {
                                       setSelectedNFTCommends(nft);
                                     }}
-                                    className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="rounded-md bg-indigo-50 py-2.5 px-3.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 transition-all duration-400"
                                   >
                                     {/* @ts-ignore */}
                                     {nft.commendCount} Reviews
@@ -686,7 +493,7 @@ export default function Example() {
                                     onClick={() => {
                                       setSelectedNFT(nft);
                                     }}
-                                    className="rounded bg-indigo-600 py-1 px-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                   >
                                     Commend
                                   </button>

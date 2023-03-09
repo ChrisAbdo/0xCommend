@@ -1,6 +1,4 @@
 import { Fragment, useState, useEffect } from "react";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import {
   Select,
   SelectContent,
@@ -16,6 +14,7 @@ import NFT from "@/backend/build/contracts/NFT.json";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useToast } from "@/lib/hooks/use-toast";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -36,6 +35,7 @@ const client = ipfsClient.create({
 });
 
 export default function CreateProfile() {
+  const { toast } = useToast();
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [formInput, updateFormInput] = useState({
     altName: "",
@@ -99,6 +99,11 @@ export default function CreateProfile() {
   async function listNFTForSale() {
     try {
       setLoading(true);
+      toast({
+        title: "Please confirm both transactions in your wallet",
+        description: "This may take a few seconds",
+      });
+
       // @ts-ignore
       const web3 = new Web3(window.ethereum);
       const url = await uploadToIPFS();
@@ -131,6 +136,11 @@ export default function CreateProfile() {
             .send({ from: accounts[0] })
             .on("receipt", function () {
               console.log("listed");
+              toast({
+                title: "Successfully created profile!",
+                description:
+                  "Your profile is now live, find it in the Commend page.",
+              });
 
               setLoading(false);
             });
@@ -249,13 +259,21 @@ export default function CreateProfile() {
                 </label>
                 <div className="mt-2 flex items-center space-x-5">
                   <span className="inline-block h-12 w-12 overflow-hidden rounded-md bg-gray-100">
-                    <svg
-                      className="h-full w-full text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                    {fileUrl ? (
+                      <img
+                        className="h-full w-full text-gray-300"
+                        src={fileUrl}
+                        alt="Profile"
+                      />
+                    ) : (
+                      <svg
+                        className="h-full w-full text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    )}
                   </span>
                   <input
                     type="file"
@@ -274,87 +292,6 @@ export default function CreateProfile() {
 
               <div className="grid grid-cols-3 gap-6">
                 <div className="col-span-3 sm:col-span-2">
-                  {/* <Listbox
-                    value={selected}
-                    onChange={(e) => setSelected(e.name)}
-                  >
-                    {({ open }) => (
-                      <>
-                        <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">
-                          Select a Role
-                        </Listbox.Label>
-                        <div className="relative mt-2">
-                          <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <span className="block truncate">
-                              {selected.name}
-                            </span>
-                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                              <ChevronUpDownIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Listbox.Button>
-
-                          <Transition
-                            show={open}
-                            as={Fragment}
-                            leave="transition ease-in duration-100"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {people.map((person) => (
-                                <Listbox.Option
-                                  key={person.id}
-                                  className={({ active }) =>
-                                    classNames(
-                                      active
-                                        ? "bg-indigo-600 text-white"
-                                        : "text-gray-900",
-                                      "relative cursor-default select-none py-2 pl-3 pr-9"
-                                    )
-                                  }
-                                  value={person}
-                                >
-                                  {({ selected, active }) => (
-                                    <>
-                                      <span
-                                        className={classNames(
-                                          selected
-                                            ? "font-semibold"
-                                            : "font-normal",
-                                          "block truncate"
-                                        )}
-                                      >
-                                        {person.name}
-                                      </span>
-
-                                      {selected ? (
-                                        <span
-                                          className={classNames(
-                                            active
-                                              ? "text-white"
-                                              : "text-indigo-600",
-                                            "absolute inset-y-0 right-0 flex items-center pr-4"
-                                          )}
-                                        >
-                                          <CheckIcon
-                                            className="h-5 w-5"
-                                            aria-hidden="true"
-                                          />
-                                        </span>
-                                      ) : null}
-                                    </>
-                                  )}
-                                </Listbox.Option>
-                              ))}
-                            </Listbox.Options>
-                          </Transition>
-                        </div>
-                      </>
-                    )}
-                  </Listbox> */}
                   <label className="block text-sm font-medium leading-6 text-gray-900">
                     Role
                   </label>
@@ -393,24 +330,15 @@ export default function CreateProfile() {
                   </Select>
                 </div>
               </div>
+              <button
+                onClick={listNFTForSale}
+                type="submit"
+                className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              >
+                Create Commend Profile!
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-end px-4 sm:px-0">
-          <button
-            type="button"
-            className="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={listNFTForSale}
-            type="submit"
-            className="ml-3 inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-          >
-            Save
-          </button>
         </div>
       </div>
     </div>
